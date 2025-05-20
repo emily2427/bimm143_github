@@ -1,0 +1,81 @@
+---
+title: "Class06 Homework"
+author: "Emily Chen (PID:A16925878)"
+format: pdf
+---
+
+# Can you improve this analysis code?
+
+```{r}
+library(bio3d)
+s1 <- read.pdb("4AKE") # kinase with drug
+s2 <- read.pdb("1AKE") # kinase no drug
+s3 <- read.pdb("1E4Y") # kinase with drug
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+
+
+
+> Q2. What are the inputs to the function?
+
+The protein names are the inputs to this functions
+
+> Q2. What the function does and how to use it.
+
+The way in which the function works is that when you type in the code `s1`, it will tell R to read.pdb("4AKE") as that is what is assigned to the vector `s1`. This is also what R will do if we put in the code `s1. chainA`. R will give us information about this protein, which seems to be missing a certain chain.
+
+```{r}
+s1
+```
+```{r}
+s1.chainA
+```
+> Q3. What is the output of the function?
+
+The output of the function is that it provided us with information about the protein such as the protein sequence along with the number of protein atoms, nucleic acids atoms, etc. In addition to that the function will also will also give us a graph that plots the residues on the x-axis and then the Bfactor on the y-axisthe plots that we get that plots the residues on the x-axis and then the Bfactor on the y-axis.
+
+# Condensing the Code.
+
+1. look for repetitive code- read.pdb and trim.pdb(s2, chain="A", elety="CA") are both repetitive
+
+
+s1 <- read.pdb("4AKE") # kinase with drug
+s2 <- read.pdb("1AKE") # kinase no drug
+s3 <- read.pdb("1E4Y") # kinase with drug
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+
+```{r}
+library(bio3d)
+id<- c("4AKE", "1AKE", "1E4Y")
+protein_bfactor <- function(pdb_ids) {
+  for (id in pdb_ids) {
+    pdb <- read.pdb(id) 
+    chainA <- trim.pdb(pdb, chain = "A", elety = "CA")  # Trim to chain A and CA atoms
+    b <- chainA$atom$b  
+   plotb3(b, sse = chainA, typ = "l", ylab = "Bfactor", main = paste("B-factor:", id))
+  }
+  
+}
+```
+
+```{r}
+protein_bfactor(c("4AKE", "1AKE", "1E4Y"))
+```
+
+
