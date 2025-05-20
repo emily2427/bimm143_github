@@ -1,0 +1,224 @@
+---
+title: "Class 7: Machine Learning 1"
+author: "Emily Chen (PID: A16925878)"
+format: pdf
+toc: true
+---
+
+Today we will explore unsupervised machine learning methods starting with clustering and dimensionality reductions.
+
+## Clustering
+
+To start, let's make up some data to cluster where we know what the answer should be. The `rnorm` functions will help us here. 
+
+
+```{r}
+hist(rnorm(10000, mean=3))
+```
+
+Return 30 numbers centered on -3
+So we are going to do rnorm() with 30 inside, and then for the mean we put -3 so that it will be centered at -3.
+```{r}
+rnorm(30, mean=-3)
+rnorm(30, mean=+3)
+```
+
+To combine the two, we will create a vector using the c() function. Below we have 60 points in total
+
+```{r}
+tmp<-c(rnorm(30, mean=-3),
+  rnorm(30, mean=+3) )
+
+x<- cbind(x=tmp, y=rev(tmp))
+
+x
+```
+
+Make a plot of `x`
+
+```{r}
+plot(x)
+```
+
+### K-means
+
+The main function in "base" R for K-means clustering is called `kmeans()`:
+There are two required arguments in this function and these are x which is the data  and centers which is the number of cluster you want.
+
+```{r}
+km<- kmeans(x,centers=2)
+km
+```
+The `kmean()` function returns a "list" with 9 components , YOu can see named components of any list with the `attributes()` function.
+```{r}
+attributes(km)
+```
+
+> Q. How many points are in each cluster
+
+The number you get is the number of points in each cluster.
+
+```{r}
+km$size
+```
+
+> Q. Cluster assignment/membership vector?
+
+```{r}
+km$cluster
+```
+
+> Q. Cluster center
+
+```{r}
+km$cluster
+```
+
+
+> Q. Make a plot of our `kmeans()` results showing cluster assignments using different color for each cluster/group of points and cluster center.
+
+When we write the code `col=c("purple", "skyblue")`, it will tell R to alternate the color so one point purple and then the next skyblue, and we can't differentiate the two clusters. To do this, we will write the code `col=km$cluster` and that will color code our two cluster.
+pch refers to the shape of the point and then cex is the size of the point.
+```{r}
+plot(x, col=km$cluster)
+points(km$centers, col="skyblue", pch=15, cex=1.5)
+```
+
+
+> Q. Run `kmeans()` again on `x` and this cluster into 4 groups/clusters and plot the smae results like the figure as above.
+
+
+```{r}
+km2<- kmeans(x,centers=4)
+km2
+```
+```{r}
+plot(x, col=km$cluster)
+points(km$centers, col="skyblue", pch=15, cex=1.4)
+```
+
+> **key-point**: K-means clustering is super popular but can be misused. One big limitation is that it can impose a clustering pattern on your data even if clear natural groupings do not exist. i.e its does what you tell it to do in terms of `center`
+
+### Hierarchical Clustering
+
+The main function in "base" R for hierarchical clustering is called `hclust()`. This functions has one required input d.You can't just pass our data set as is into `hclust()` you must give "distance matrix" as input. We can get this fro the `dist()` function in R.
+
+```{r}
+d<- dist(x)
+hc <- hclust(d)
+hc
+```
+
+The results of ``hclust` don't have a useful `print()` method but do have a special `plot()` method. When we plot it we get this speical graph that looks like a phylogentic tree.
+
+```{r}
+plot(hc)
+abline(h=8, col="pink")
+```
+
+To get our main cluster assignment (membership vector) we need to "cut" tree at the big goal posts. The code for this would be cutree()
+
+```{r}
+grps<- cutree(hc, h=8)
+grps
+```
+
+```{r}
+table(grps)
+```
+
+```{r}
+plot(x,col=grps)
+```
+
+Hierarchical Clustering is distinct in that the dendrogram (tree figure) can reveal the potential grouping in your data (unlike K-means)
+
+## Principle Component Analysis (PCA)
+
+PCA is a common and highly useful dimensionality reduction technique used in many fields, particularly bioinformatics.
+
+Here we will anlayze some data from the UK on food consumption
+
+### Data import
+```{r}
+url <- "https://tinyurl.com/UK-foods"
+x <- read.csv(url)
+head(x)
+```
+
+This way is not ideal because if we keep running it, we will get rid of one of the columns after every run...
+```{r}
+rownames(x) <-x[,1]
+x<- x[,-1]
+head(x)
+```
+```{r}
+rownames(x) <-x[,1]
+x<- x[,-1]
+head(x)
+```
+
+A way to fix it is do what is this is to write this code
+```{r}
+x <- read.csv(url, row.names=1)
+head(x)
+```
+
+
+```{r}
+barplot(as.matrix(x), beside=F, col=rainbow(nrow(x)))
+```
+
+One conventional plot that can be useful is called a "pairs" plot
+```{r}
+pairs (x, col=rainbow(nrow(x)), pch=16)
+```
+For the second graph in the diagram, the y-axis is England, and the x-axis is Wales. Each dot on the graph represent the differnt food we are looking at in the data
+
+### PCA to the rescue
+
+The main functions in the base R for PCA is called `prcomp()`
+```{r}
+pca <- prcomp(t(x))
+summary(pca)
+```
+
+The `prcomp()` function returns a list of options for our results with fice attributes/components.
+
+```{r}
+attributes(pca)
+```
+
+The two main "results" inhere are `pca$x` adn `pca$rotation`.
+The first of these (`pca$x`) contains the scores of the data on the new PC axis- we use these to make our "PCA plot"
+
+```{r}
+pca$x
+```
+
+```{r}
+library(ggplot2)
+library (ggrepel)
+
+#Make a plot of pca$x with PC1 vs PC2
+ggplot(pca$x) +
+  aes(PC1, PC2, label=rownames(pca$x)) +
+  geom_point()+
+  geom_text_repel()
+```
+The plot above is showing a plot that is comparing two different dimensions, PC1 and PC2. we are looking at the variance. 
+
+The second major result is curated in the `pca$rotaation` object or component.  Lets plot this to see what PCA is picking up
+
+```{r}
+pca$rotation
+```
+```{r}
+ggplot(pca$rotation)+
+  aes(PC1, rownames(pca$rotation))+ 
+  geom_col()
+```
+The barplot above shows the variance in the different food consumptions.PC1 is a dimension, and it will show the greatest amount of variance.
+
+
+The PC number can be no more than the the number of food and also the countries.
