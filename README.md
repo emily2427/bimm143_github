@@ -1,5 +1,5 @@
 # Bioinformatic Class
-title: Emily's classwork from BIMM143 S25 UCSD :)
+## Emily's classwork from BIMM143 S25 UCSD :)
 logo: http://bioboot.github.io/bomm143/assets/img/logo.png
 theme: jekyll-theme-minimal
 
