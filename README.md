@@ -4,7 +4,7 @@ logo: http://bioboot.github.io/bomm143/assets/img/logo.png
 theme: jekyll-theme-minimal
 
 ## Content
-- [05 Advanced graphics with **ggplot2**]((https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf))
+- [05 Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf)
 
 - [06 R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/Class%2006%20Homework.html)
 
