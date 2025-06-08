@@ -1,0 +1,37 @@
+---
+title: "Class 11.1: AlphaFold"
+author: "Emily Chen (PID:A16925878)"
+format: pdf
+
+---
+
+
+Here we read the results from AlphaFold and try to interpret all the models and quality scores metrics:
+
+```{r}
+library(bio3d)
+pth <- "dimer_23119"
+pdb.files<-list.files( path=pth, full.names=TRUE, pattern= ".pdb")
+```
+
+Align and supperpose all these models
+```{r}
+file.exists(pdb.files)
+```
+
+```{r}
+pdbs<- pdbaln(pdb.files, fit=TRUE, exefile="msa")
+```
+
+```{r}
+library(bio3d)
+#view.pdbs(pdbs)
+```
+
+```{r}
+plot(pdbs$b[1,], typ= "l", ylim=c(0,100), ylab= "pLDDR Score")
+lines(pdbs$b[2,], typ= "l", col=("blue"))
+lines(pdbs$b[3,], typ= "l", col=("hotpink"))
+lines(pdbs$b[4,], typ= "l", col=("purple"))
+lines(pdbs$b[5,], typ= "l", col=("lightgreen"))
+```

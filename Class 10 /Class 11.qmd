@@ -1,0 +1,79 @@
+---
+title: "Class 11:Comparative Structure Analysis"
+author: "Emily Chen (PID: A16925878)"
+format: pdf
+---
+
+Load up the packages we will need for the analysis of protein structure sets.
+
+```{r}
+library(bio3d)
+```
+
+We will analyze the ADK starting with a single ADK database accession code: "1ake_A"
+
+```{r}
+# id <- get.seq("1ake_A")
+id <- '1ake_A'
+aa <- get.seq(id)
+aa
+```
+
+Now we can search the PDB database to find all related entries
+```{r}
+blast <-blast.pdb(aa)
+```
+
+```{r}
+head(blast$hit.tbl)
+```
+
+make a little summary figure of these results
+
+```{r}
+hits <- plot(blast)
+```
+
+The "top hits" are our most similar entries in the resultst
+
+```{r}
+hits$pdb.id
+```
+
+```{r}
+#download related PDB files
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+
+```{r}
+# Align related PBDs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+```
+
+```{r}
+library(bio3dview)
+#view.pdbs(pdbs)
+```
+
+This view is better than all the data; however, it is still hard to see the alignment and to see which one is more similar to the other or how to families of sequences are similar.
+
+Lets do a PCA:
+```{r}
+pc<- pca(pdbs)
+plot(pc)
+```
+
+```{r}
+plot(pc,pc.axes=1:2)
+```
+
+
+
+
+Write a PDB "trajectory" for mol-star
+```{r}
+mktrj(pc, fil="pca_results.pdb")
+```
+
+
+

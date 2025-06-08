@@ -1,0 +1,109 @@
+---
+title: "Class 12: Genomic Information"
+author: "Emily Chen (PID:A16925878)"
+format: pdf
+---
+
+# Sequence 1. Proportion of G/G in a population
+
+Downloaded CSV file from Ensemble < https://useast.ensembl.org/Homo_sapiens/Variation/Sample?db=core;r=17:39894335-40054336;v=rs8067378;vdb=variation;vf=959672880#373531_tablePanel
+
+
+Here we read this CSV file
+
+```{r}
+mxl <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl)
+```
+
+```{r}
+mxl$Genotype..forward.strand.
+```
+
+we can use the `table()` to generate a table that will tell us the numbers  of the different genotypes
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+To find the proportions we have to divide it but the number of rows. We would multiple it b y 100 to get a percentage
+
+```{r}
+table(mxl$Genotype..forward.strand.)/nrow(mxl)*100
+```
+14% of the MXL community have the genotype G|G
+
+
+
+Now let's look at a different population. We will be looking at the British in England and Scotland
+
+```{r}
+gbr <- read.csv("373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(gbr)
+```
+
+```{r}
+table(gbr$Genotype..forward.strand.)
+```
+```{r}
+table(gbr$Genotype..forward.strand.)/nrow(gbr) *100
+```
+~30% of the GBR community have the genotype G|G
+
+This variant that is associated with childhood asthma is more frequent in the GBR population than thre MKL population. 
+
+Let's now dig into this further.
+
+# Section 4: Population Scale Analysis
+
+One sample is obviously not enough to know what is happening in a population. You are interested in assessing genetic differences on a population scale. 
+
+How many sampels do we have?
+
+```{r}
+expr <- read.table("rs8067378_ENSG00000172057.6.txt")
+head(expr)
+```
+
+```{r}
+nrow(expr)
+```
+
+```{r}
+table(expr$geno)
+```
+ 
+
+```{r}
+library(dplyr)
+
+expr %>%
+  group_by(geno) %>%
+  summarise(Median_Exp = median(exp))
+```
+> Q13. What is the sample size for each genotype and their corresponding median expression levels for each of these genotypes?
+
+There are 462 samples in this data set, with 108 having the genotype A/A, 233 samples having genotype A/G, and 121 having the genotype G/G. The median expression of genotype A/A is 31.25, 25 for genotype A/G, and 20.1 for genotype G/G. 
+
+
+
+```{r}
+library(ggplot2)
+ggplot(expr)+
+  aes(geno,exp, fill=geno)+
+  geom_boxplot(notch=TRUE)
+```
+```{r}
+expr %>%
+  group_by(geno) %>%
+  summarise(Avg_Exp = mean(exp))
+```
+
+
+
+> Q14.Generate a boxplot with a box per genotype, what could you infer from the relative expression value between A/A and G/G displayed in this plot? Does the SNP effect the expression of ORMDL3?
+
+Looking at the box plot we can see that genotype A|A has a higher relative expression value than genotype G|G. If we were to look at the mean relative expression value for both these genotypes, A|A has a higher means than G|G. Yes this SNP effect the expression level of ORMDL3 because as we can see the individuals with the genotype A|A have a greater expression of ORMDL3 than individuals with the genotype G|G.
+
+
+

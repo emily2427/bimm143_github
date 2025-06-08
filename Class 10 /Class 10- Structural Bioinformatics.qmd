@@ -1,0 +1,169 @@
+---
+title: "Class 10 Structural Bioinformatics"
+author: "Emily Chen (PID:A16925878)"
+format: pdf
+toc: true
+---
+
+## The PDB Database
+
+
+The main repository of biomolecular structure data is called the [Protein Data Bank](https://www.rcsb.org/) (PDB). It is the second oldest database (after GenBank)
+
+(https://www.rcsb.org/)
+
+What is currently in the PDB? We can access current composition stats [here]((https://www.rcsb.org/))
+
+```{r}
+stats <- read.csv("Data Export Summary.csv", row.names=1)
+head(stats)
+```
+
+
+```{r}
+202990/252188522 *100
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+stats$X.ray
+as.numeric(stats$X.ray)
+```
+we can see here that when we run the code `as.numeric(stats$X.ray)` we get NA for the first four values. The reason for this is because in the first four values there are commas and in the last two 170 and 11 there are no commas. So we need to get rid of these commas and the way we do that is by using `gsub(). The first argument is what you want ot get rid of, the second argument is what you want to repalce it with If nothing, then just have quotation marks, then the third argument is the function with which you want to work.
+
+```{r}
+
+x<-stats$X.ray
+
+  #Substitute commas for nothing
+  y<-gsub(",", "", x)
+
+  # convert to numeric
+  sum(as.numeric(y))
+```
+Turn this snippet into a functions so I can use it any time I have a comma problem (i.e the other columns of this `stats` table)
+
+```{r}
+comma.sum <- function(x){
+  y<- gsub(",", "", x)
+  return( sum(as.numeric(y)))
+}
+ 
+```
+
+```{r}
+xray.sum <- comma.sum(stats$X.ray)
+em.sum <- comma.sum(stats$EM)
+total.sum <- comma.sum (stats$Total)
+```
+
+```{r}
+xray.sum/total.sum*100
+```
+
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+protein.sum <- comma.sum(stats["Protein (only)", "Total"])
+protein.sum/total.sum *100
+```
+
+```{r}
+sum(stats$Neutron)
+```
+
+
+```{r}
+em.sum/total.sum*100
+```
+
+> Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+Skipped
+
+##2 Visualizing with Mol-Star
+
+Explore the HIV-1 protease strcuture with PDB code: `1HSG`
+Mol-star homepage at https://molestar.org/viewer/
+
+The code that is used to insert an image is `![]()` inside the bracket. You will put your caption in here, and then for the other parentheses, we will add the name of the file of the image. The code for the image below is `![Figure 1. A first view of HIV-Pr] (1HSG.png)`
+
+![Figure 1. A first view of HIV-Pr](1HSG.png)
+
+![Figure 2. Molecular surface showing binding cavity](1HSG2.png)
+
+
+![Figure 3. The Catatiliically important ASP 25 amino acids and drug interacting HOH 308 water molecule](1HSGhaa.png)
+
+## 3. Using the bio3d package in R
+
+The Bio3D package is focused on structural bioinformatics analysis and allows us to read and analyse PDB and related data
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+pdb<- read.pdb("1hsg")
+pdb
+```
+```{r}
+attributes(pdb)
+```
+
+We can see atom data wtih `pdb$atom`
+```{r}
+head(pdb$atom)
+```
+
+```{r}
+head(pdbseq(pdb))
+```
+
+We can make quick 3D viz with the `view.pdb`
+
+```{r}
+library(bio3dview)
+library(NGLVieweR)
+
+#view.pdb(pdb, backgroundColor= "skyblue", colorScheme= "sse") |>
+#setSpin()
+```
+
+```{r}
+library(bio3d)  
+#sel <- atom.select(pdb, resno=25)
+#view.pdb(pdb, highlight=sel,
+        # highlight.style = "spacefill") |>
+  #setRock()
+```
+
+## Prediciting functional motion os a single structure
+
+We can finish off today with a bioinformatic prediction of the functional motions of a protein.
+
+We will run a Normal Mode Analysis (NMA)
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+```{r}
+m<- nma(adk)
+plot(m)
+```
+
+```{r}
+#view.nma(m)
+```
+
+We can write out a trajectory of the predicetd dynamic and iew this in Mol-star
+
+```{r}
+mktrj(m, file="nma.pdb")
+```
+
+A file called nma.pdb will be saved into class 10 project and now we can go to molstar and look at the sequence
+
