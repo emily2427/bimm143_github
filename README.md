@@ -1,7 +1,7 @@
 # BIMM143
-theme: jekyll-theme-minimal
-logo: http://bioboot.github.io/bomm143/assets/img/logo.png
 title: Emily's classwork from BIMM143 S25 UCSD :)
+logo: http://bioboot.github.io/bomm143/assets/img/logo.png
+theme: jekyll-theme-minimal
 
 - 04 Intro to R
 
