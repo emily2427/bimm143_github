@@ -3,7 +3,7 @@ Emily's classwork from BIMM143 S25 UCSD :)
 
 - 04 Intro to R
 
-- 05 Advanced graphics with **ggplot2**
+- [05 Advanced graphics with **ggplot2**] (https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.qmd)
 
 - 06 R functions
 
