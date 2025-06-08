@@ -1,5 +1,5 @@
 # BIMM143
-My classwork from BIMM143 S25 UCSD :)
+Emily's classwork from BIMM143 S25 UCSD :)
 
 - 04 Intro to R
 
