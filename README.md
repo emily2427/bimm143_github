@@ -32,4 +32,4 @@ theme: jekyll-theme-minimal
 
 - Class 18 [Mini Project: Investigating Pertussis Resurgence]
 
-- Class 19 Cancer Mutation Analysis Mini Project
+- Class 19 [Cancer Mutation Analysis Mini Project]
