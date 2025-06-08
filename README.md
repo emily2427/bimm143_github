@@ -6,11 +6,11 @@ theme: jekyll-theme-minimal
 ## Content
 - [05 Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf)
 
-- Class 06 [R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/class06.pdf)
+- Class 06: [R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/class06.pdf)
 
-- Class 07 [Introduction to machine learning for Bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class07/class07.pdf)
+- Class 07: [Introduction to machine learning for Bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class07/class07.pdf)
 
-- Class 08 [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class-08--Mini-Project.pdf)
+- Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class-08--Mini-Project.pdf)
 
 - 09 Halloween Candy Mini-Project
 
