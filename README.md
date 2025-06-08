@@ -6,3 +6,7 @@ My classwork from BIMM143 S25 UCSD :)
 - 05 Advanced graphics with **ggplot2**
 
 - 06 R functions
+
+- 07
+
+- 08 
