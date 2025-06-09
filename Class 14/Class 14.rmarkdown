@@ -1,0 +1,247 @@
+---
+title: "Class 14: RNA-Seq analysis mini-project"
+author: "Emily Chen (PID:A16925878)"
+format: md
+---
+
+
+
+# Required Packages
+
+
+
+```{r, message=FALSE}
+library(DESeq2)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(pathview)
+library(gage)
+library(gageData)
+```
+
+
+
+# Data Import
+
+
+```{r}
+countData <- read.csv("GSE37704_featurecounts.csv", row.names = 1)
+colData <-read.csv("GSE37704_metadata.csv", row.names = 1)
+head(colData)
+head(countData)
+```
+
+```{r}
+rownames(colData)
+```
+
+
+
+Remove the troublesome first column so we math the metadata
+
+
+```{r}
+counts<-countData[,-1]
+```
+
+```{r}
+all(rownames(colData)==colnames(counts))
+```
+
+
+
+# Remove zero count
+
+We will have rows in `counts` for genes that we can not say anything about because they have zero epcression in the particular tissue we are looking at.
+
+
+
+```{r}
+head(counts)
+```
+
+
+
+If the `rowSums() is cero then a given gene (i.e row) has no counts data and we shoudl exclude these genes from further considerations.
+
+
+
+```{r}
+to.keep<- rowSums(counts) !=0
+cleancounts<- counts[to.keep,]
+```
+
+
+
+> Q. How many genes do we have left?
+
+
+
+```{r}
+nrow(cleancounts)
+```
+
+
+There are 15,975 genes left
+
+# Setup DESeq object for analysis
+
+
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = cleancounts,
+                              colData = colData,
+                              design= ~condition)
+```
+
+
+
+# Run DESeq analysis
+
+
+
+```{r}
+dds<- DESeq(dds)
+```
+
+
+
+# Extract the results
+
+
+
+```{r}
+res<- results(dds)
+head(res)
+```
+
+
+
+# Add Gene annotations
+
+
+
+```{r}
+res$name<- mapIds(x=org.Hs.eg.db,
+             keys = rownames(res),
+             keytype = "ENSEMBL",
+             column="GENENAME")
+
+res$entrez<- mapIds(x=org.Hs.eg.db,
+             keys = rownames(res),
+             keytype = "ENSEMBL",
+             column="ENTREZID")
+head(res)
+```
+
+
+
+
+# Save my results to a CSV file
+
+
+```{r}
+write.csv(res, file="result.csv")
+```
+
+```{r}
+mycols<- rep("grey", nrow(res))
+mycols[res$log2FoldChange <= -2] <- "blue"
+mycols[res$log2FoldChange >=2] <- "purple"
+mycols[res$padj >=0.005] <- "grey"
+plot(res$log2FoldChange, -log(res$padj), col=mycols)
+abline(v=-2, col="blue")
+abline(v=+2, col="purple")
+abline(h=-log(0.05), col="green")
+```
+
+```{r}
+library(ggplot2)
+ggplot(as.data.frame(res))+
+  aes(log2FoldChange, -log(padj))+
+  geom_point(color=mycols)+
+  geom_vline(xintercept = -2, color= "blue")+
+  geom_vline(xintercept = 2, color= "purple")+
+  geom_hline(yintercept=-log(0.005), col="green")+
+  labs(x = "Log2 Fold Change",
+       y = "-Log(Adjusted P-Value)")+
+  theme_bw()
+```
+
+```{r}
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+# Focus on signaling and metabolic pathways only
+kegg.sets.hs = kegg.sets.hs[sigmet.idx.hs]
+
+# Examine the first 3 pathways
+head(kegg.sets.hs, 3)
+```
+
+```{r}
+foldchanges <-res$log2FoldChange
+names(foldchanges) = res$entrez
+head(foldchanges)
+```
+
+```{r}
+keggres <- gage(foldchanges, gsets=kegg.sets.hs)
+attributes(keggres)
+```
+
+```{r}
+head(keggres$less)
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110")
+```
+
+
+# Results visulaization
+
+![](hsa04110.pathview.png)
+
+# Gene Ontology (GO) genesets
+
+
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets, same.dir=TRUE)
+
+lapply(gobpres, head)
+```
+
+```{r}
+head(gobpres$less, 5)
+```
+
+
+
+## Reactome analysis online
+
+We need to make a little file of our significant genes that we can upload to the Reactome webpage
+
+
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "name"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+
+```{r}
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+
+
+![](CellCycle_5.png)
+
+
