@@ -1,7 +1,6 @@
 # Bioinformatic Class
 ## Emily's classwork from BIMM143 S25 UCSD :)
-"logo:http://bioboot.github.io/bomm143/assets/img/logo.png"
-"theme:jekyll-theme-minimal"
+
 
 ## Content
 - Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf)
@@ -12,7 +11,7 @@
 
 - Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class-08--Mini-Project.pdf)
 
-- Class 09: [Halloween Candy Mini-Project]
+- Class 09: [Halloween Candy Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/Class09/Class%2009-%20Halloween%20Mini%20Project%20.md)
 
 - Class 10: [Structural Bioinformatics (pt1)]
 
