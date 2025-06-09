@@ -1,7 +1,7 @@
 # Bioinformatic Class
 ## Emily's classwork from BIMM143 S25 UCSD :)
 
-theme: jekyll-theme-cayman
+Add _config.yml to set Cayman theme
 
 ## Content
 - Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.md)
