@@ -19,16 +19,17 @@
 
 - Class 12: [Genome informatics](https://github.com/emily2427/bimm143_github/blob/main/Class%2012/Class%2012.md)
 
-- Class 13: [Transcriptomics and the analysis of RNA-Seq data]
+- Class 13: [Transcriptomics and the analysis of RNA-Seq data](https://github.com/emily2427/bimm143_github/blob/main/Class%2013/Class%2013.md)
 
-- Class 14 [RNA-Seq analysis mini-project]
+- Class 14 [RNA-Seq analysis mini-project](https://github.com/emily2427/bimm143_github/blob/main/Class%2014/Class%2014.rmarkdown)
 
 - Class 15 [Hands-on with Git and GitHub]
 
-- Class 16 [Essential UNIX for bioinformatics]
+- Class 16 [Essential UNIX for bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class16/hw%2016%20graphs.md)
+    - [PDF of Class 16 that shows the graphs](https://github.com/emily2427/bimm143_github/blob/main/class16%20/hw-16-graphs.pdf)
 
-- Class 17 [Analyzing sequencing data in the cloud]
+- Class 17 [Analyzing sequencing data in the cloud](https://github.com/emily2427/bimm143_github/blob/main/class17/class17_HW.md)
 
-- Class 18 [Mini Project: Investigating Pertussis Resurgence]
+- Class 18 [Mini Project: Investigating Pertussis Resurgence](https://github.com/emily2427/bimm143_github/blob/main/class18/class18.md)
 
-- Class 19 [Cancer Mutation Analysis Mini Project]
+- Class 19 [Cancer Mutation Analysis Mini Project](https://github.com/emily2427/bimm143_github/blob/main/class19/class_19.rmarkdown)
