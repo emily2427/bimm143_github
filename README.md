@@ -15,9 +15,9 @@
 
 - Class 10: [Structural Bioinformatics (pt1)](https://github.com/emily2427/bimm143_github/blob/main/Class%2010/Class%2010-%20Structural%20Bioinformatics.md)
 
-- Class 11: [Structural Bioinformatics (pt2. Focus on new AlphaFold2)] (https://github.com/emily2427/bimm143_github/blob/main/Class%2011/Class%2011.md)
+- Class 11: [Structural Bioinformatics (pt2. Focus on new AlphaFold2)](https://github.com/emily2427/bimm143_github/blob/main/Class%2011/Class%2011.md)
 
-- Class 12: [Genome informatics] (https://github.com/emily2427/bimm143_github/blob/main/Class%2012/Class%2012.md)
+- Class 12: [Genome informatics](https://github.com/emily2427/bimm143_github/blob/main/Class%2012/Class%2012.md)
 
 - Class 13: [Transcriptomics and the analysis of RNA-Seq data]
 
