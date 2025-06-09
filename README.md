@@ -3,7 +3,7 @@
 
 
 ## Content
-- Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf)
+- Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.md)
 
 - Class 06: [R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/class06.pdf)
 
