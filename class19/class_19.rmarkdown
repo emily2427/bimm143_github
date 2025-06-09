@@ -1,0 +1,44 @@
+---
+title: "class 19"
+author: "Emily Chen"
+format: md
+---
+
+```{r}
+##install.packages("BiocManager")  # if not already installed
+BiocManager::install("Biostrings")
+
+library(Biostrings)
+```
+
+```{r}
+seqs <- readAAStringSet("A16925878_mutant_seq.fa")
+
+# Check headers
+names(seqs)
+wt_seq <- as.character(seqs[[1]])
+mut_seq <- as.character(seqs[[2]])
+
+# Check sequence length
+if (nchar(wt_seq) != nchar(mut_seq)) {
+  stop("Wild-type and mutant sequences are different lengths!")
+}
+wt_vec <- strsplit(wt_seq, "")[[1]]
+mut_vec <- strsplit(mut_seq, "")[[1]]
+
+# Find mutation positions
+mutation_positions <- which(wt_vec != mut_vec)
+
+# Format mutations as e.g., "K552V"
+mutation_list <- paste0(wt_vec[mutation_positions],
+                        mutation_positions,
+                        mut_vec[mutation_positions])
+
+# Print result
+print(mutation_list)
+```
+
+```{r}
+
+```
+
