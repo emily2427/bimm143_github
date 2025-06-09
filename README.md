@@ -5,19 +5,19 @@
 ## Content
 - Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.md)
 
-- Class 06: [R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/class06.pdf)
+- Class 06: [R functions](https://github.com/emily2427/bimm143_github/blob/main/class06functions/class06.md)
 
-- Class 07: [Introduction to machine learning for Bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class07/class07.pdf)
+- Class 07: [Introduction to machine learning for Bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class07/class07.md)
 
-- Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class-08--Mini-Project.pdf)
+- Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class%2008-%20Mini%20Project.md))
 
 - Class 09: [Halloween Candy Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/Class09/Class%2009-%20Halloween%20Mini%20Project%20.md)
 
-- Class 10: [Structural Bioinformatics (pt1)]
+- Class 10: [Structural Bioinformatics (pt1)](https://github.com/emily2427/bimm143_github/blob/main/Class%2010/Class%2010-%20Structural%20Bioinformatics.md)
 
-- Class 11: [Structural Bioinformatics (pt2. Focus on new AlphaFold2)]
+- Class 11: [Structural Bioinformatics (pt2. Focus on new AlphaFold2)] (https://github.com/emily2427/bimm143_github/blob/main/Class%2011/Class%2011.md)
 
-- Class 12: [Genome informatics]
+- Class 12: [Genome informatics] (https://github.com/emily2427/bimm143_github/blob/main/Class%2012/Class%2012.md)
 
 - Class 13: [Transcriptomics and the analysis of RNA-Seq data]
 
