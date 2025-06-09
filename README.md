@@ -1,7 +1,7 @@
 # Bioinformatic Class
 ## Emily's classwork from BIMM143 S25 UCSD :)
-logo: http://bioboot.github.io/bomm143/assets/img/logo.png
-theme: jekyll-theme-minimal
+"logo:http://bioboot.github.io/bomm143/assets/img/logo.png"
+"theme:jekyll-theme-minimal"
 
 ## Content
 - Class 05: [Advanced graphics with **ggplot2**](https://github.com/emily2427/bimm143_github/blob/main/class05/class5ggplot.pdf)
