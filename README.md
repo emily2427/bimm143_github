@@ -8,7 +8,7 @@
 
 - Class 07: [Introduction to machine learning for Bioinformatics](https://github.com/emily2427/bimm143_github/blob/main/class07/class07.md)
 
-- Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class%2008-%20Mini%20Project.md))
+- Class 08: [Human Breast Cancer Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/class08%20copy/Class%2008-%20Mini%20Project.md)
 
 - Class 09: [Halloween Candy Mini-Project](https://github.com/emily2427/bimm143_github/blob/main/Class09/Class%2009-%20Halloween%20Mini%20Project%20.md)
 
